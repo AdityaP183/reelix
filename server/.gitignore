@@ -1,0 +1,53 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Build output
+*.out
+*.test
+*.log
+
+# Go build artifacts
+bin/
+build/
+dist/
+*.a
+
+# Go workspace files
+go.work
+go.work.sum
+
+# Dependency directories
+vendor/
+
+# IDE/editor specific
+.vscode/
+.idea/
+*.swp
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Environment and config files
+.env
+.env.*
+*.local
+
+# Temporary or cache data
+*.tmp
+*.temp
+*.bak
+*.old
+*.orig
+*.cache
+.cache/
+coverage.out
+
+# Docker
+docker-compose.override.yml
+*.pid
+
