@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/AdityaP183/reelix/server/database"
@@ -91,15 +92,24 @@ func UpdateAllTokens(userId, token, refreshToken string) (err error) {
 }
 
 func GetAccessToken(c *gin.Context) (string, error) {
+	// Try reading from Authorization header
+	authHeader := c.GetHeader("Authorization")
+	if authHeader != "" {
+		parts := strings.SplitN(authHeader, " ", 2)
+		if len(parts) == 2 && strings.EqualFold(parts[0], "Bearer") {
+			return parts[1], nil
+		}
+	}
+
+	// Fallback to cookie if header not present
 	tokenString, err := c.Cookie("access_token")
 	if err != nil {
-
 		return "", err
 	}
 
 	return tokenString, nil
-
 }
+
 
 func ValidateToken(tokenString string) (*SignedDetails, error) {
 	claims := &SignedDetails{}
@@ -120,7 +130,6 @@ func ValidateToken(tokenString string) (*SignedDetails, error) {
 	}
 
 	return claims, nil
-
 }
 
 func GetUserIdFromContext(c *gin.Context) (string, error) {
@@ -137,7 +146,6 @@ func GetUserIdFromContext(c *gin.Context) (string, error) {
 	}
 
 	return id, nil
-
 }
 
 func GetRoleFromContext(c *gin.Context) (string, error) {
@@ -154,7 +162,6 @@ func GetRoleFromContext(c *gin.Context) (string, error) {
 	}
 
 	return memberRole, nil
-
 }
 
 func ValidateRefreshToken(tokenString string) (*SignedDetails, error) {
