@@ -34,7 +34,6 @@ Thumbs.db
 
 # Environment and config files
 .env
-.env.*
 *.local
 
 # Temporary or cache data
