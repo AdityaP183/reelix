@@ -54,7 +54,7 @@ func GenerateAllTokens(email, firstName, lastName, role, userId string) (string,
 		Role:      role,
 		UserId:    userId,
 		RegisteredClaims: jwt.RegisteredClaims{
-			Issuer:    "MagicStream",
+			Issuer:    "Reelix",
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * 7 * time.Hour)),
 		},
